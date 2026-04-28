@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ալյոնա & Գոռ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-color: #ffffff;
+            --overlay: rgba(0, 0, 0, 0.25);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* The Full-Screen Background Photo */
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Using your provided image */
+            background-image: url('https://lh3.googleusercontent.com/d/19QvnPtOxgt452q8nm20eePchdFCEX3nh');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: transform 12s ease-out;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+        }
+
+        /* The Names Container */
+        .name-container {
+            position: absolute;
+            bottom: 12%;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .names {
+            color: var(--text-color);
+            font-size: 3.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(60px);
+            animation: slideUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            animation-delay: 0.6s;
+            text-shadow: 0px 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .sub-text {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            font-size: 0.75rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-top: 12px;
+            opacity: 0;
+            animation: fadeIn 2.5s ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-image" id="bgImage"></div>
+
+    <div class="name-container">
+        <div class="names" id="coupleNames">
+            Ալյոնա & Գոռ
+        </div>
+        <div class="sub-text">
+            Save the Date
+        </div>
+    </div>
+
+    <script>
+        // Trigger the slow cinematic zoom when the page loads
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('bgImage').style.transform = "scale(1.15)";
+            }, 100);
+        };
+    </script>
+</body>
+</html>
