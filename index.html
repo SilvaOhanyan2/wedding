@@ -7,110 +7,219 @@
     <link href="https://drive.google.com/file/d/19QvnPtOxgt452q8nm20eePchdFCEX3nh/view?usp=sharing" rel="stylesheet">
     <style>
         :root {
-            --text-color: #ffffff;
-            --overlay: rgba(0, 0, 0, 0.25);
+            --text-dark: #2d2d2d;
+            --accent-gold: #c5a36b;
+            --bg-cream: #fdfbf7;
         }
 
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000;
             font-family: 'Cormorant Garamond', serif;
+            background-color: var(--bg-cream);
+            scroll-behavior: smooth;
+            color: var(--text-dark);
         }
 
-        /* The Full-Screen Background Photo */
+        /* --- SECTION 1: HERO --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            background: #000;
+        }
+
         .hero-image {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* Using your provided image */
-            background-image: url('https://lh3.googleusercontent.com/d/19QvnPtOxgt452q8nm20eePchdFCEX3nh');
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://drive.google.com/uc?export=view&id=19QvnPtOxgt452q8nm20eePchdFCEX3nh');
             background-size: cover;
             background-position: center;
-            z-index: 1;
             transition: transform 12s ease-out;
+            z-index: 1;
         }
 
         .hero-image::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--overlay);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.25);
         }
 
-        /* The Names Container */
         .name-container {
-            position: absolute;
-            bottom: 12%;
-            width: 100%;
-            text-align: center;
+            position: relative;
             z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
+            padding-bottom: 15vh;
+            color: white;
         }
 
         .names {
-            color: var(--text-color);
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             font-weight: 300;
-            letter-spacing: 1px;
             opacity: 0;
-            transform: translateY(60px);
+            transform: translateY(50px);
             animation: slideUp 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-            animation-delay: 0.6s;
-            text-shadow: 0px 4px 20px rgba(0,0,0,0.4);
+            animation-delay: 0.5s;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.3);
         }
 
-        .sub-text {
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            color: white;
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- SECTION 2: DETAILS --- */
+        .details-page {
+            min-height: 100vh;
+            padding: 80px 25px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--bg-cream);
+        }
+
+        .timer-title {
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        .countdown {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+            min-width: 65px;
+        }
+
+        .number {
+            font-size: 2.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            color: var(--text-dark);
+        }
+
+        .label {
             font-size: 0.75rem;
-            letter-spacing: 6px;
             text-transform: uppercase;
-            margin-top: 12px;
-            opacity: 0;
-            animation: fadeIn 2.5s ease forwards;
-            animation-delay: 1.8s;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-top: 5px;
+        }
+
+        .invite-content {
+            max-width: 340px;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 40px;
+        }
+
+        .invite-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .main-message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
         }
 
         @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeIn {
-            to {
-                opacity: 0.7;
-            }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);}
+            40% {transform: translate(-50%, -10px);}
+            60% {transform: translate(-50%, -5px);}
+        }
+
+        @media (max-width: 380px) {
+            .names { font-size: 2.8rem; }
+            .number { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="hero-image" id="bgImage"></div>
-
-    <div class="name-container">
-        <div class="names" id="coupleNames">
-            Ալյոնա & Գոռ
+    <section class="hero">
+        <div class="hero-image" id="bgImage"></div>
+        <div class="name-container">
+            <div class="names">Ալյոնա & Գոռ</div>
         </div>
-    </div>
+        <div class="scroll-hint">SWIPE UP</div>
+    </section>
+
+    <section class="details-page">
+        <div class="timer-title">Միջոցառմանը մնաց</div>
+        
+        <div class="countdown" id="timer">
+            <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
+            <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
+            <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
+            <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
+        </div>
+
+        <div class="invite-content">
+            <div class="invite-title">Սիրելի՛ ընկերներ և բարեկամներ,</div>
+            <p class="main-message">
+                Սրտանց հրավիրում ենք Ձեզ մեզ հետ միասին տոնելու մեր կյանքի ամենակարևոր և գեղեցիկ օրը՝ մեր հարսանիքը:
+            </p>
+        </div>
+    </section>
 
     <script>
-        // Trigger the slow cinematic zoom when the page loads
+        // TARGET DATE: August 9, 2026
+        const weddingDate = new Date(2026, 7, 9, 17, 0, 0).getTime();
+
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = d < 10 && d >= 0 ? "0" + d : (d < 0 ? "00" : d);
+            document.getElementById("hours").innerText = h < 10 && h >= 0 ? "0" + h : (h < 0 ? "00" : h);
+            document.getElementById("minutes").innerText = m < 10 && m >= 0 ? "0" + m : (m < 0 ? "00" : m);
+            document.getElementById("seconds").innerText = s < 10 && s >= 0 ? "0" + s : (s < 0 ? "00" : s);
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("timer").innerHTML = "<div style='font-size: 1.8rem; color: var(--accent-gold); letter-spacing: 2px; font-weight: 500;'>ՇՆՈՐՀԱՎՈՐ ՄԵՐ ՀԱՐՍԱՆԻՔԸ</div>";
+                document.querySelector(".timer-title").style.display = "none";
+            }
+        }, 1000);
+
         window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('bgImage').style.transform = "scale(1.15)";
+            setTimeout(() => { 
+                document.getElementById('bgImage').style.transform = "scale(1.15)"; 
             }, 100);
         };
     </script>
