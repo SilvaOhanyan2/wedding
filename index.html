@@ -7,48 +7,49 @@
     <style>
         :root { --text-dark: #2d2d2d; --accent-gold: #c5a36b; --bg-cream: #fdfbf7; }
         body, html { margin: 0; padding: 0; width: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
-        section { width: 100%; min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
+        section { width: 100%; min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; }
 
         /* --- MUSIC --- */
-        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); }
+        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.8); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); font-size: 0.8rem; }
         .music-playing { animation: rotate 4s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- HERO & CENTERING --- */
-        .hero { background: #000; }
+        /* --- HERO STYLE (Text at Bottom) --- */
+        .hero { justify-content: flex-end; align-items: center; background: #000; }
         .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; transition: transform 10s ease-out; }
-        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
+        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 50%, rgba(0,0,0,0.7)); }
         .bw-filter { filter: grayscale(100%) contrast(110%); }
-        .content-overlay { position: relative; z-index: 10; text-align: center; color: white; width: 90%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .content-overlay-hero { position: relative; z-index: 10; text-align: center; color: white; width: 100%; padding-bottom: 15vh; }
 
-        /* --- INFO PAGES --- */
-        .info-page { padding: 60px 20px; text-align: center; }
-        .countdown { display: flex; gap: 15px; margin: 30px 0; justify-content: center; }
-        .time-block { display: flex; flex-direction: column; min-width: 60px; }
+        /* --- INFO PAGES (Text in Center) --- */
+        .info-page { justify-content: center; align-items: center; padding: 60px 25px; text-align: center; }
+        .countdown { display: flex; gap: 15px; margin: 30px 0; }
+        .time-block { display: flex; flex-direction: column; min-width: 55px; }
         .number { font-size: 2rem; font-family: sans-serif; font-weight: 200; }
-        .label { font-size: 0.7rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; }
+        .label { font-size: 0.65rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- VENUE CARDS (SQUARE & SLIDING) --- */
-        .location-card { margin-bottom: 80px; width: 100%; max-width: 350px; opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
-        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 12px; object-fit: cover; margin-bottom: 25px; border: 1px solid var(--accent-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .location-title { font-size: 1.8rem; margin-bottom: 10px; }
-        .location-address { display: block; margin-bottom: 25px; font-style: italic; color: #666; }
-        .maps-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+        /* --- VENUE CARDS (Square & Sliding) --- */
+        .location-card { margin-bottom: 60px; width: 100%; max-width: 340px; opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
+        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 15px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .location-title { font-size: 1.8rem; margin-bottom: 5px; }
+        .location-address { display: block; margin-bottom: 25px; color: #777; font-size: 1.1rem; }
+        .maps-btn { display: inline-block; padding: 12px 35px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; }
 
-        /* --- SAVE THE DATE STYLE --- */
-        .std-wrapper { margin-bottom: 20px; text-align: center; }
-        .word-save, .word-date { font-size: 4rem; text-transform: uppercase; letter-spacing: 5px; display: block; line-height: 1; }
-        .word-the { font-family: 'Dancing Script', cursive; font-size: 3rem; margin: -10px 0; display: block; }
-        .date-text-std { font-size: 1.5rem; letter-spacing: 5px; margin: 20px 0; border-top: 1px solid white; border-bottom: 1px solid white; padding: 10px 40px; }
+        /* --- SAVE THE DATE --- */
+        .word-save, .word-date { font-size: 3.5rem; text-transform: uppercase; letter-spacing: 5px; display: block; line-height: 1; }
+        .word-the { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin: -5px 0; display: block; }
+        .date-text-std { font-size: 1.4rem; letter-spacing: 6px; margin: 20px 0; border-top: 1px solid white; border-bottom: 1px solid white; padding: 10px 0; width: 200px; margin-left: auto; margin-right: auto; }
 
-        /* --- RSVP FORM --- */
-        .rsvp-container { background: white; padding: 40px 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); width: 90%; max-width: 400px; margin-top: 20px; }
-        .rsvp-btn { background-color: var(--text-dark); color: white; padding: 18px 40px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 20px; width: 100%; box-sizing: border-box; }
+        /* --- RSVP --- */
+        .rsvp-container { background: white; padding: 35px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); width: 100%; max-width: 320px; }
+        .rsvp-btn { background-color: var(--text-dark); color: white; padding: 18px; border-radius: 8px; text-decoration: none; display: block; margin-top: 20px; font-size: 0.9rem; letter-spacing: 1px; }
 
-        /* ANIMATION CLASS */
+        /* ANIMATIONS */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .scroll-hint { position: absolute; bottom: 30px; color: white; font-size: 0.7rem; letter-spacing: 3px; animation: bounce 2s infinite; z-index: 10; }
-        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+        .animate-up { opacity: 0; transform: translateY(30px); transition: all 1.2s ease-out; }
+        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 0.65rem; letter-spacing: 3px; animation: bounce 2s infinite; z-index: 10; opacity: 0.8; }
+        @keyframes bounce { 0%, 100% {transform: translate(-50%, 0);} 50% {transform: translate(-50%, -10px);} }
     </style>
 </head>
 <body>
@@ -56,48 +57,48 @@
     <audio id="weddingMusic" loop><source src="Hayko - Khostovanutyun.mp3" type="audio/mpeg"></audio>
     <div id="musicControl" onclick="toggleMusic()">♪</div>
 
-    <!-- PAGE 1: HERO -->
+    <!-- FIRST PHOTO: Names moved to bottom -->
     <section class="hero">
         <div class="hero-image" id="bg1" style="background-image: url('1nkar.jpeg');"></div>
-        <div class="content-overlay">
-            <h1 class="animate-up" style="font-size: 3.5rem; margin: 0;">Ալյոնա & Գոռ</h1>
+        <div class="content-overlay-hero">
+            <h1 class="animate-up" style="font-size: 3rem; margin: 0;">Ալյոնա & Գոռ</h1>
         </div>
         <div class="scroll-hint">SWIPE UP</div>
     </section>
 
-    <!-- PAGE 2: COUNTDOWN -->
+    <!-- COUNTDOWN: Stayed in center -->
     <section class="info-page">
         <div class="animate-up">
-            <div style="font-size: 1.5rem; font-style: italic; margin-bottom: 20px;">Միջոցառմանը մնաց</div>
+            <div style="font-size: 1.4rem; font-style: italic; margin-bottom: 10px;">Միջոցառմանը մնաց</div>
             <div class="countdown" id="timer">
                 <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
                 <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
                 <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
                 <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
             </div>
-            <p style="max-width: 300px; font-size: 1.2rem; line-height: 1.6; font-style: italic;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
+            <p style="max-width: 280px; font-size: 1.2rem; line-height: 1.6; font-style: italic; margin: 0 auto;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
         </div>
     </section>
 
-    <!-- PAGE 3: SAVE THE DATE -->
+    <!-- SECOND PHOTO: Save the Date moved to bottom -->
     <section class="hero">
         <div class="hero-image bw-filter" id="bg2" style="background-image: url('2nkar.jpeg');"></div>
-        <div class="content-overlay">
+        <div class="content-overlay-hero">
             <div class="std-wrapper animate-up">
                 <span class="word-save">Save</span>
                 <span class="word-the">the</span>
                 <span class="word-date">Date</span>
+                <div class="date-text-std">09.08.2026</div>
             </div>
-            <div class="date-text-std animate-up">09.08.2026</div>
         </div>
     </section>
 
-    <!-- PAGE 4: LOCATIONS (SQUARE IMAGES) -->
+    <!-- VENUES: Square images & slide effect -->
     <section class="info-page">
         <div class="location-card">
             <img src="photo_2026-04-28_13-37-01.jpg" class="venue-img">
             <div class="location-title">Պսակադրություն</div>
-            <span style="color: var(--accent-gold);">Ժամը՝ 14:00</span>
+            <span style="color: var(--accent-gold); font-size: 1.1rem; display: block; margin-bottom: 5px;">Ժամը՝ 14:00</span>
             <span class="location-address">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</span>
             <a href="https://maps.app.goo.gl/mzSm5veBbR4KWLB87" class="maps-btn">Քարտեզ</a>
         </div>
@@ -105,35 +106,35 @@
         <div class="location-card">
             <img src="Screenshot_20260429_005811_Instagram.jpg" class="venue-img">
             <div class="location-title">Հանդիսություն</div>
-            <span style="color: var(--accent-gold);">Ժամը՝ 17:30</span>
+            <span style="color: var(--accent-gold); font-size: 1.1rem; display: block; margin-bottom: 5px;">Ժամը՝ 17:30</span>
             <span class="location-address">«Արարատ Իվենթ Հոլլ»</span>
             <a href="https://www.google.com/maps/search/?api=1&query=39.204468,46.462255" class="maps-btn">Քարտեզ</a>
         </div>
     </section>
 
-    <!-- PAGE 5: EXTRA COUPLE PHOTO -->
+    <!-- THIRD PHOTO: Text at bottom -->
     <section class="hero">
+        <!-- Make sure you have a 'couple3.jpeg' or change this name -->
         <div class="hero-image" id="bg3" style="background-image: url('couple3.jpeg');"></div>
-        <div class="content-overlay">
+        <div class="content-overlay-hero">
             <div class="animate-up" style="font-size: 1.8rem; font-style: italic;">Մենք սպասում ենք Ձեզ</div>
         </div>
     </section>
 
-    <!-- PAGE 6: RSVP -->
-    <section class="info-page" style="background-color: #f9f9f9;">
+    <!-- RSVP: Center -->
+    <section class="info-page" style="background-color: #fcfaf7;">
         <div class="animate-up">
-            <h2 style="font-size: 2rem; margin-bottom: 10px;">RSVP</h2>
-            <p style="color: #666; margin-bottom: 30px;">Խնդրում ենք հաստատել Ձեր մասնակցությունը մինչև հուլիսի 25-ը</p>
+            <h2 style="font-size: 2.2rem; margin-bottom: 10px;">RSVP</h2>
+            <p style="color: #666; margin-bottom: 30px; font-style: italic;">Խնդրում ենք հաստատել Ձեր մասնակցությունը մինչև հուլիսի 25-ը</p>
             
             <div class="rsvp-container">
-                <p style="text-align: left; font-size: 0.9rem; line-height: 1.8;">
-                    <strong>Հարցեր հաստատման համար:</strong><br>
-                    1. Կկարողանա՞ք ներկա գտնվել (Այո/Ոչ)<br>
-                    2. Քանի՞ հոգի կլինեք Ձեր ընտանիքից<br>
-                    3. Անուն Ազգանուն
+                <p style="text-align: left; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">
+                    <strong>Խնդրում ենք նշել.</strong><br>
+                    • Կկարողանա՞ք ներկա գտնվել<br>
+                    • Քանի՞ հոգով կլինեք<br>
+                    • Ձեր Անուն Ազգանունը
                 </p>
-                <!-- REPLACE EMAIL BELOW -->
-                <a href="mailto:your-email@example.com?subject=Հարսանիքի հաստատում&body=1. Ներկա կլինենք: %0D%0A2. Մարդկանց քանակը: %0D%0A3. Անուն Ազգանուն: " class="rsvp-btn">ՈՒՂԱՐԿԵԼ ԷԼ-ՓՈՍՏՈՎ</a>
+                <a href="mailto:silvaohanyan2@gmail.com?subject=Հարսանիքի հաստատում&body=1. Ներկա կլինենք (Այո/Ոչ): %0D%0A2. Մարդկանց քանակը: %0D%0A3. Անուն Ազգանուն: " class="rsvp-btn">ՈՒՂԱՐԿԵԼ ԷԼ-ՓՈՍՏՈՎ</a>
             </div>
         </div>
     </section>
