@@ -6,50 +6,55 @@
     <title>Ալյոնա & Գոռ</title>
     <style>
         :root { --text-dark: #2d2d2d; --accent-gold: #c5a36b; --bg-cream: #fdfbf7; }
-        body, html { margin: 0; padding: 0; width: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
         
-        section { width: 100%; min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+        /* Force height and reset margins */
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
+        
+        /* Each section is a flex container to handle centering */
+        section { 
+            width: 100%; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; /* Vertical centering */
+            text-align: center;
+            position: relative;
+            box-sizing: border-box;
+        }
 
         /* --- MUSIC --- */
-        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.8); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); font-size: 0.8rem; }
+        #musicControl { position: fixed; top: 15px; right: 15px; z-index: 1000; width: 40px; height: 40px; background: rgba(255,255,255,0.8); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); }
         .music-playing { animation: rotate 4s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- HERO STYLE (Text at Bottom) --- */
-        .hero { justify-content: flex-end; align-items: center; background: #000; }
+        /* --- HERO PAGES (Text at bottom) --- */
+        .hero { justify-content: flex-end; padding-bottom: 12vh; }
         .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; transition: transform 10s ease-out; }
-        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 50%, rgba(0,0,0,0.7)); }
-        .bw-filter { filter: grayscale(100%) contrast(110%); }
-        .content-overlay-hero { position: relative; z-index: 10; text-align: center; color: white; width: 100%; padding-bottom: 15vh; }
+        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 40%, rgba(0,0,0,0.6)); }
+        .hero-content { position: relative; z-index: 10; color: white; width: 90%; }
 
-        /* --- INFO PAGES (Text in Center) --- */
-        .info-page { justify-content: center; align-items: center; padding: 60px 25px; text-align: center; }
-        .countdown { display: flex; gap: 15px; margin: 30px 0; }
-        .time-block { display: flex; flex-direction: column; min-width: 55px; }
-        .number { font-size: 2rem; font-family: sans-serif; font-weight: 200; }
-        .label { font-size: 0.65rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; }
+        /* --- INFO PAGES --- */
+        .info-page { padding: 40px 20px; }
+        .countdown { display: flex; justify-content: center; gap: 10px; margin: 25px 0; width: 100%; }
+        .time-block { display: flex; flex-direction: column; width: 65px; }
+        .number { font-size: 2rem; font-family: sans-serif; font-weight: 300; }
+        .label { font-size: 0.6rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- VENUE CARDS (Square & Sliding) --- */
-        .location-card { margin-bottom: 60px; width: 100%; max-width: 340px; opacity: 0; transform: translateY(40px); transition: all 1s ease-out; }
-        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 15px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .location-title { font-size: 1.8rem; margin-bottom: 5px; }
-        .location-address { display: block; margin-bottom: 25px; color: #777; font-size: 1.1rem; }
-        .maps-btn { display: inline-block; padding: 12px 35px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; }
+        /* --- VENUE CARDS --- */
+        .location-card { width: 100%; max-width: 320px; margin-bottom: 50px; opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 12px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .maps-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
 
-        /* --- SAVE THE DATE --- */
-        .word-save, .word-date { font-size: 3.5rem; text-transform: uppercase; letter-spacing: 5px; display: block; line-height: 1; }
-        .word-the { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin: -5px 0; display: block; }
-        .date-text-std { font-size: 1.4rem; letter-spacing: 6px; margin: 20px 0; border-top: 1px solid white; border-bottom: 1px solid white; padding: 10px 0; width: 200px; margin-left: auto; margin-right: auto; }
-
-        /* --- RSVP --- */
-        .rsvp-container { background: white; padding: 35px 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); width: 100%; max-width: 320px; }
-        .rsvp-btn { background-color: var(--text-dark); color: white; padding: 18px; border-radius: 8px; text-decoration: none; display: block; margin-top: 20px; font-size: 0.9rem; letter-spacing: 1px; }
+        /* --- RSVP FORM --- */
+        .rsvp-container { background: white; padding: 30px 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 320px; text-align: left; }
+        .input-field { width: 100%; padding: 12px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+        .rsvp-btn { background: var(--text-dark); color: white; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 1rem; cursor: pointer; }
 
         /* ANIMATIONS */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .animate-up { opacity: 0; transform: translateY(30px); transition: all 1.2s ease-out; }
-        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 0.65rem; letter-spacing: 3px; animation: bounce 2s infinite; z-index: 10; opacity: 0.8; }
-        @keyframes bounce { 0%, 100% {transform: translate(-50%, 0);} 50% {transform: translate(-50%, -10px);} }
+        .scroll-hint { position: absolute; bottom: 20px; color: white; font-size: 0.7rem; letter-spacing: 3px; z-index: 10; animation: bounce 2s infinite; opacity: 0.7; }
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
     </style>
 </head>
 <body>
@@ -57,85 +62,66 @@
     <audio id="weddingMusic" loop><source src="Hayko - Khostovanutyun.mp3" type="audio/mpeg"></audio>
     <div id="musicControl" onclick="toggleMusic()">♪</div>
 
-    <!-- FIRST PHOTO: Names moved to bottom -->
+    <!-- PAGE 1 -->
     <section class="hero">
         <div class="hero-image" id="bg1" style="background-image: url('1nkar.jpeg');"></div>
-        <div class="content-overlay-hero">
-            <h1 class="animate-up" style="font-size: 3rem; margin: 0;">Ալյոնա & Գոռ</h1>
+        <div class="hero-content">
+            <h1 style="font-size: 3.2rem; margin: 0; font-weight: 400;">Ալյոնա & Գոռ</h1>
         </div>
         <div class="scroll-hint">SWIPE UP</div>
     </section>
 
-    <!-- COUNTDOWN: Stayed in center -->
+    <!-- PAGE 2: COUNTDOWN -->
     <section class="info-page">
-        <div class="animate-up">
-            <div style="font-size: 1.4rem; font-style: italic; margin-bottom: 10px;">Միջոցառմանը մնաց</div>
-            <div class="countdown" id="timer">
-                <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
-                <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
-                <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
-                <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
-            </div>
-            <p style="max-width: 280px; font-size: 1.2rem; line-height: 1.6; font-style: italic; margin: 0 auto;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
+        <div style="font-size: 1.4rem; font-style: italic;">Միջոցառմանը մնաց</div>
+        <div class="countdown">
+            <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
+            <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
+            <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
+            <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
         </div>
+        <p style="max-width: 280px; line-height: 1.6; font-size: 1.2rem;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
     </section>
 
-    <!-- SECOND PHOTO: Save the Date moved to bottom -->
-    <section class="hero">
-        <div class="hero-image bw-filter" id="bg2" style="background-image: url('2nkar.jpeg');"></div>
-        <div class="content-overlay-hero">
-            <div class="std-wrapper animate-up">
-                <span class="word-save">Save</span>
-                <span class="word-the">the</span>
-                <span class="word-date">Date</span>
-                <div class="date-text-std">09.08.2026</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- VENUES: Square images & slide effect -->
+    <!-- PAGE 3: LOCATIONS -->
     <section class="info-page">
         <div class="location-card">
-            <img src="photo_2026-04-28_13-37-01.jpg" class="venue-img">
-            <div class="location-title">Պսակադրություն</div>
-            <span style="color: var(--accent-gold); font-size: 1.1rem; display: block; margin-bottom: 5px;">Ժամը՝ 14:00</span>
-            <span class="location-address">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</span>
+            <img src="photo_2026-05-01_12-21-14.jpg" class="venue-img">
+            <div style="font-size: 1.8rem;">Պսակադրություն</div>
+            <div style="color: var(--accent-gold); margin: 5px 0;">Ժամը՝ 14:00</div>
+            <div style="margin-bottom: 20px; color: #666;">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</div>
             <a href="https://maps.app.goo.gl/mzSm5veBbR4KWLB87" class="maps-btn">Քարտեզ</a>
         </div>
 
         <div class="location-card">
-            <img src="Screenshot_20260429_005811_Instagram.jpg" class="venue-img">
-            <div class="location-title">Հանդիսություն</div>
-            <span style="color: var(--accent-gold); font-size: 1.1rem; display: block; margin-bottom: 5px;">Ժամը՝ 17:30</span>
-            <span class="location-address">«Արարատ Իվենթ Հոլլ»</span>
+            <img src="photo_2026-05-01_12-21-13.jpg" class="venue-img">
+            <div style="font-size: 1.8rem;">Հանդիսություն</div>
+            <div style="color: var(--accent-gold); margin: 5px 0;">Ժամը՝ 17:30</div>
+            <div style="margin-bottom: 20px; color: #666;">«Արարատ Իվենթ Հոլլ»</div>
             <a href="https://www.google.com/maps/search/?api=1&query=39.204468,46.462255" class="maps-btn">Քարտեզ</a>
         </div>
     </section>
 
-    <!-- THIRD PHOTO: Text at bottom -->
-    <section class="hero">
-        <!-- Make sure you have a 'couple3.jpeg' or change this name -->
-        <div class="hero-image" id="bg3" style="background-image: url('couple3.jpeg');"></div>
-        <div class="content-overlay-hero">
-            <div class="animate-up" style="font-size: 1.8rem; font-style: italic;">Մենք սպասում ենք Ձեզ</div>
-        </div>
-    </section>
-
-    <!-- RSVP: Center -->
-    <section class="info-page" style="background-color: #fcfaf7;">
-        <div class="animate-up">
-            <h2 style="font-size: 2.2rem; margin-bottom: 10px;">RSVP</h2>
-            <p style="color: #666; margin-bottom: 30px; font-style: italic;">Խնդրում ենք հաստատել Ձեր մասնակցությունը մինչև հուլիսի 25-ը</p>
-            
-            <div class="rsvp-container">
-                <p style="text-align: left; font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px;">
-                    <strong>Խնդրում ենք նշել.</strong><br>
-                    • Կկարողանա՞ք ներկա գտնվել<br>
-                    • Քանի՞ հոգով կլինեք<br>
-                    • Ձեր Անուն Ազգանունը
-                </p>
-                <a href="mailto:silvaohanyan2@gmail.com?subject=Հարսանիքի հաստատում&body=1. Ներկա կլինենք (Այո/Ոչ): %0D%0A2. Մարդկանց քանակը: %0D%0A3. Անուն Ազգանուն: " class="rsvp-btn">ՈՒՂԱՐԿԵԼ ԷԼ-ՓՈՍՏՈՎ</a>
+    <!-- PAGE 4: RSVP -->
+    <section class="info-page">
+        <p style="margin-bottom: 25px; font-size: 1.1rem; max-width: 300px;">
+            Խնդրում ենք նախապես տեղեկացնել Ձեր մասնակցության մասին
+        </p>
+        
+        <div class="rsvp-container">
+            <label style="font-weight: bold;">1. Կկարողանա՞ք մասնակցել</label>
+            <div style="margin: 15px 0;">
+                <label style="display: block; margin-bottom: 10px;"><input type="radio" name="att" value="Այո, մեծ հաճույքով" checked> Այո, մեծ հաճույքով</label>
+                <label style="display: block;"><input type="radio" name="att" value="Ոչ, չեմ կարողանա"> Ոչ, չեմ կարողանա</label>
             </div>
+
+            <label style="font-weight: bold;">2. Անուն Ազգանուն</label>
+            <input type="text" id="name" class="input-field" placeholder="Լրացրեք այստեղ">
+
+            <label style="font-weight: bold;">3. Հյուրերի քանակը</label>
+            <input type="number" id="count" class="input-field" placeholder="0">
+
+            <button onclick="sendRSVP()" class="rsvp-btn">Ուղարկել</button>
         </div>
     </section>
 
@@ -147,6 +133,18 @@
         }
         document.addEventListener('click', () => { if(music.paused) toggleMusic(); }, {once: true});
 
+        function sendRSVP() {
+            const att = document.querySelector('input[name="att"]:checked').value;
+            const name = document.getElementById('name').value;
+            const count = document.getElementById('count').value;
+            if(!name) { alert("Խնդրում ենք լրացնել Անունը"); return; }
+            
+            const mail = "silvaohanyan2@gmail.com";
+            const sub = encodeURIComponent("RSVP: " + name);
+            const body = encodeURIComponent(`Մասնակցություն: ${att}\nԱնուն: ${name}\nՔանակ: ${count}`);
+            window.location.href = `mailto:${mail}?subject=${sub}&body=${body}`;
+        }
+
         const weddingDate = new Date(2026, 7, 9, 17, 0, 0).getTime();
         setInterval(() => {
             const now = new Date().getTime(); const dist = weddingDate - now;
@@ -157,15 +155,9 @@
         }, 1000);
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    const bg = entry.target.parentElement.querySelector('.hero-image');
-                    if(bg) bg.style.transform = "scale(1.1)";
-                }
-            });
+            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.animate-up, .location-card').forEach(el => observer.observe(el));
+        document.querySelectorAll('.location-card').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
