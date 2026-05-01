@@ -7,112 +7,164 @@
     <style>
         :root { --text-dark: #2d2d2d; --accent-gold: #c5a36b; --bg-cream: #fdfbf7; }
         body, html { margin: 0; padding: 0; width: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
-        section { width: 100%; min-height: 100vh; position: relative; overflow: hidden; }
-        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        section { width: 100%; min-height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+        /* --- MUSIC --- */
+        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 45px; height: 45px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); }
         .music-playing { animation: rotate 4s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .hero { display: flex; justify-content: center; align-items: flex-end; background: #000; }
-        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; transition: transform 12s ease-out; }
-        .bw-filter { filter: grayscale(100%) contrast(110%); }
+
+        /* --- HERO & CENTERING --- */
+        .hero { background: #000; }
+        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; transition: transform 10s ease-out; }
         .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); }
-        .content-overlay { position: relative; z-index: 10; text-align: center; padding-bottom: 12vh; color: white; width: 100%; }
-        .info-page { padding: 80px 25px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .countdown { display: flex; gap: 15px; margin: 40px 0; }
+        .bw-filter { filter: grayscale(100%) contrast(110%); }
+        .content-overlay { position: relative; z-index: 10; text-align: center; color: white; width: 90%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+        /* --- INFO PAGES --- */
+        .info-page { padding: 60px 20px; text-align: center; }
+        .countdown { display: flex; gap: 15px; margin: 30px 0; justify-content: center; }
         .time-block { display: flex; flex-direction: column; min-width: 60px; }
-        .number { font-size: 2.2rem; font-family: 'Montserrat', sans-serif; font-weight: 200; }
+        .number { font-size: 2rem; font-family: sans-serif; font-weight: 200; }
         .label { font-size: 0.7rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; }
-        .std-wrapper { display: inline-block; text-align: left; position: relative; margin-bottom: 20px; }
-        .word-save { font-family: 'Playfair Display', serif; font-size: 4.5rem; text-transform: uppercase; line-height: 1; letter-spacing: 5px; }
-        .word-the { font-family: 'Dancing Script', cursive; font-size: 3.2rem; display: block; padding-left: 100px; margin: -15px 0; text-transform: lowercase; color: white; }
-        .word-date { font-family: 'Playfair Display', serif; font-size: 4.5rem; text-transform: uppercase; line-height: 1; letter-spacing: 5px; }
-        .date-text-std { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; letter-spacing: 6px; margin: 30px auto; font-weight: 200; border-top: 1px solid rgba(255,255,255,0.4); border-bottom: 1px solid rgba(255,255,255,0.4); padding: 12px 0; width: 240px; }
-        .venue-img { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 1px solid var(--accent-gold); padding: 5px; background: white; }
-        .location-card { margin-bottom: 60px; width: 100%; max-width: 320px; opacity: 0; transform: translateY(30px); transition: all 1s ease; }
-        .location-title { font-size: 1.8rem; margin-bottom: 10px; font-weight: 500; }
-        .location-time { font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--accent-gold); margin-bottom: 8px; display: block; }
-        .maps-btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
-        .maps-btn:hover { background: var(--accent-gold); color: white; }
-        .rsvp-btn { background-color: #25D366; color: white; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-family: 'Montserrat', sans-serif; display: inline-block; margin-top: 30px; box-shadow: 0 10px 20px rgba(37,211,102,0.2); }
-        .animate-up { opacity: 0; transform: translateY(40px); transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* --- VENUE CARDS (SQUARE & SLIDING) --- */
+        .location-card { margin-bottom: 80px; width: 100%; max-width: 350px; opacity: 0; transform: translateY(50px); transition: all 1s ease-out; }
+        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 12px; object-fit: cover; margin-bottom: 25px; border: 1px solid var(--accent-gold); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .location-title { font-size: 1.8rem; margin-bottom: 10px; }
+        .location-address { display: block; margin-bottom: 25px; font-style: italic; color: #666; }
+        .maps-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+
+        /* --- SAVE THE DATE STYLE --- */
+        .std-wrapper { margin-bottom: 20px; text-align: center; }
+        .word-save, .word-date { font-size: 4rem; text-transform: uppercase; letter-spacing: 5px; display: block; line-height: 1; }
+        .word-the { font-family: 'Dancing Script', cursive; font-size: 3rem; margin: -10px 0; display: block; }
+        .date-text-std { font-size: 1.5rem; letter-spacing: 5px; margin: 20px 0; border-top: 1px solid white; border-bottom: 1px solid white; padding: 10px 40px; }
+
+        /* --- RSVP FORM --- */
+        .rsvp-container { background: white; padding: 40px 25px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); width: 90%; max-width: 400px; margin-top: 20px; }
+        .rsvp-btn { background-color: var(--text-dark); color: white; padding: 18px 40px; border-radius: 5px; text-decoration: none; display: inline-block; margin-top: 20px; width: 100%; box-sizing: border-box; }
+
+        /* ANIMATION CLASS */
         .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 20; color: white; font-family: 'Montserrat', sans-serif; font-size: 0.6rem; letter-spacing: 4px; animation: bounce 2s infinite; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translate(-50%, 0);} 40% {transform: translate(-50%, -10px);} 60% {transform: translate(-50%, -5px);} }
+        .scroll-hint { position: absolute; bottom: 30px; color: white; font-size: 0.7rem; letter-spacing: 3px; animation: bounce 2s infinite; z-index: 10; }
+        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
     </style>
 </head>
 <body>
-    <audio id="weddingMusic" loop><source src="Hayko - Khostovanutyun.mp3" type="audio/mpeg"></audio>
-    <div id="musicControl" onclick="toggleMusic()"><span id="musicIcon">♪</span></div>
 
+    <audio id="weddingMusic" loop><source src="Hayko - Khostovanutyun.mp3" type="audio/mpeg"></audio>
+    <div id="musicControl" onclick="toggleMusic()">♪</div>
+
+    <!-- PAGE 1: HERO -->
     <section class="hero">
         <div class="hero-image" id="bg1" style="background-image: url('1nkar.jpeg');"></div>
-        <div class="content-overlay"><div class="names animate-up" id="p1-names" style="font-size: 3.5rem;">Ալյոնա & Գոռ</div></div>
+        <div class="content-overlay">
+            <h1 class="animate-up" style="font-size: 3.5rem; margin: 0;">Ալյոնա & Գոռ</h1>
+        </div>
         <div class="scroll-hint">SWIPE UP</div>
     </section>
 
+    <!-- PAGE 2: COUNTDOWN -->
     <section class="info-page">
-        <div style="font-size: 1.5rem; font-style: italic;">Միջոցառմանը մնաց</div>
-        <div class="countdown" id="timer">
-            <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
-            <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
-            <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
-            <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
-        </div>
-        <div style="max-width: 320px; border-top: 1px solid #eee; padding-top: 40px;">
-            <div style="font-size: 1.8rem; margin-bottom: 25px;">Սիրելի՛ ընկերներ և բարեկամներ,</div>
-            <p style="font-size: 1.2rem; line-height: 1.8; color: #555; font-style: italic;">Սրտանց հրավիրում ենք Ձեզ մեզ հետ միասին տոնելու մեր կյանքի ամենակարևոր և գեղեցիկ օրը՝ մեր հարսանիքը:</p>
+        <div class="animate-up">
+            <div style="font-size: 1.5rem; font-style: italic; margin-bottom: 20px;">Միջոցառմանը մնաց</div>
+            <div class="countdown" id="timer">
+                <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
+                <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
+                <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
+                <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
+            </div>
+            <p style="max-width: 300px; font-size: 1.2rem; line-height: 1.6; font-style: italic;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
         </div>
     </section>
 
+    <!-- PAGE 3: SAVE THE DATE -->
     <section class="hero">
         <div class="hero-image bw-filter" id="bg2" style="background-image: url('2nkar.jpeg');"></div>
         <div class="content-overlay">
-            <div class="std-wrapper animate-up"><span class="word-save">Save</span><span class="word-the">the</span><span class="word-date">Date</span></div>
-            <div class="date-text-std animate-up">09/08/2026</div>
-            <div class="animate-up" style="font-size: 1.3rem; font-style: italic; max-width: 280px; margin: 0 auto;">Գեղեցիկ օր, երբ մենք կդառնանք ամուսիններ</div>
+            <div class="std-wrapper animate-up">
+                <span class="word-save">Save</span>
+                <span class="word-the">the</span>
+                <span class="word-date">Date</span>
+            </div>
+            <div class="date-text-std animate-up">09.08.2026</div>
         </div>
     </section>
 
+    <!-- PAGE 4: LOCATIONS (SQUARE IMAGES) -->
     <section class="info-page">
-        <div class="location-card" id="church">
+        <div class="location-card">
             <img src="photo_2026-04-28_13-37-01.jpg" class="venue-img">
             <div class="location-title">Պսակադրություն</div>
-            <span class="location-time">Ժամը՝ 14:00</span>
+            <span style="color: var(--accent-gold);">Ժամը՝ 14:00</span>
             <span class="location-address">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</span>
-            <a href="https://maps.app.goo.gl/mzSm5veBbR4KWLB87" target="_blank" class="maps-btn">Տեսնել քարտեզի վրա</a>
+            <a href="https://maps.app.goo.gl/mzSm5veBbR4KWLB87" class="maps-btn">Քարտեզ</a>
         </div>
-        <div class="location-card" id="restaurant">
+
+        <div class="location-card">
             <img src="Screenshot_20260429_005811_Instagram.jpg" class="venue-img">
-            <div class="location-title">Հարսանյաց հանդիսություն</div>
-            <span class="location-time">Ժամը՝ 17:30</span>
+            <div class="location-title">Հանդիսություն</div>
+            <span style="color: var(--accent-gold);">Ժամը՝ 17:30</span>
             <span class="location-address">«Արարատ Իվենթ Հոլլ»</span>
-            <a href="https://www.google.com/maps/search/?api=1&query=39.204468,46.462255" target="_blank" class="maps-btn">Տեսնել քարտեզի վրա</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=39.204468,46.462255" class="maps-btn">Քարտեզ</a>
         </div>
     </section>
 
-    <section class="info-page" style="background-color: #fff;">
+    <!-- PAGE 5: EXTRA COUPLE PHOTO -->
+    <section class="hero">
+        <div class="hero-image" id="bg3" style="background-image: url('couple3.jpeg');"></div>
+        <div class="content-overlay">
+            <div class="animate-up" style="font-size: 1.8rem; font-style: italic;">Մենք սպասում ենք Ձեզ</div>
+        </div>
+    </section>
+
+    <!-- PAGE 6: RSVP -->
+    <section class="info-page" style="background-color: #f9f9f9;">
         <div class="animate-up">
-            <div style="font-size: 2.2rem; margin-bottom: 20px;">RSVP</div>
-            <p style="font-size: 1.2rem; color: #666; font-style: italic; max-width: 300px; margin-bottom: 30px;">Խնդրում ենք հաստատել Ձեր մասնակցությունը մինչև հուլիսի 25-ը</p>
-            <a href="https://wa.me/374XXXXXXXX?text=Ողջույն, հաստատում եմ իմ մասնակցությունը" class="rsvp-btn">ՀԱՍՏԱՏԵԼ WhatsApp-ով</a>
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">RSVP</h2>
+            <p style="color: #666; margin-bottom: 30px;">Խնդրում ենք հաստատել Ձեր մասնակցությունը մինչև հուլիսի 25-ը</p>
+            
+            <div class="rsvp-container">
+                <p style="text-align: left; font-size: 0.9rem; line-height: 1.8;">
+                    <strong>Հարցեր հաստատման համար:</strong><br>
+                    1. Կկարողանա՞ք ներկա գտնվել (Այո/Ոչ)<br>
+                    2. Քանի՞ հոգի կլինեք Ձեր ընտանիքից<br>
+                    3. Անուն Ազգանուն
+                </p>
+                <!-- REPLACE EMAIL BELOW -->
+                <a href="mailto:your-email@example.com?subject=Հարսանիքի հաստատում&body=1. Ներկա կլինենք: %0D%0A2. Մարդկանց քանակը: %0D%0A3. Անուն Ազգանուն: " class="rsvp-btn">ՈՒՂԱՐԿԵԼ ԷԼ-ՓՈՍՏՈՎ</a>
+            </div>
         </div>
     </section>
 
     <script>
         const music = document.getElementById("weddingMusic");
-        const musicBtn = document.getElementById("musicControl");
-        function toggleMusic() { if (music.paused) { music.play(); musicBtn.classList.add("music-playing"); } else { music.pause(); musicBtn.classList.remove("music-playing"); } }
-        document.addEventListener('click', () => { if (music.paused) { music.play(); musicBtn.classList.add("music-playing"); } }, { once: true });
+        function toggleMusic() { 
+            if (music.paused) { music.play(); document.getElementById("musicControl").classList.add("music-playing"); } 
+            else { music.pause(); document.getElementById("musicControl").classList.remove("music-playing"); } 
+        }
+        document.addEventListener('click', () => { if(music.paused) toggleMusic(); }, {once: true});
+
         const weddingDate = new Date(2026, 7, 9, 17, 0, 0).getTime();
-        setInterval(function() {
+        setInterval(() => {
             const now = new Date().getTime(); const dist = weddingDate - now;
             document.getElementById("days").innerText = Math.max(0, Math.floor(dist / 86400000));
             document.getElementById("hours").innerText = Math.max(0, Math.floor((dist % 86400000) / 3600000));
             document.getElementById("minutes").innerText = Math.max(0, Math.floor((dist % 3600000) / 60000));
             document.getElementById("seconds").innerText = Math.max(0, Math.floor((dist % 60000) / 1000));
         }, 1000);
-        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); const bg = entry.target.parentElement.querySelector('.hero-image'); if(bg) bg.style.transform = "scale(1.1)"; } }); }, { threshold: 0.1 });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const bg = entry.target.parentElement.querySelector('.hero-image');
+                    if(bg) bg.style.transform = "scale(1.1)";
+                }
+            });
+        }, { threshold: 0.1 });
         document.querySelectorAll('.animate-up, .location-card').forEach(el => observer.observe(el));
-        window.onload = () => { setTimeout(() => { document.getElementById('p1-names').classList.add('visible'); document.getElementById('bg1').style.transform = "scale(1.1)"; }, 500); };
     </script>
 </body>
 </html>
