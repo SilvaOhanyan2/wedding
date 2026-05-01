@@ -4,57 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ալյոնա & Գոռ</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --text-dark: #2d2d2d; --accent-gold: #c5a36b; --bg-cream: #fdfbf7; }
         
-        /* Force height and reset margins */
-        body, html { margin: 0; padding: 0; width: 100%; height: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
+        * { box-sizing: border-box; }
+        body, html { margin: 0; padding: 0; width: 100%; font-family: 'Cormorant Garamond', serif; background-color: var(--bg-cream); scroll-behavior: smooth; color: var(--text-dark); overflow-x: hidden; }
         
-        /* Each section is a flex container to handle centering */
+        /* Perfect Centering Logic */
         section { 
             width: 100%; 
             min-height: 100vh; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            justify-content: center; /* Vertical centering */
+            justify-content: center; 
             text-align: center;
             position: relative;
-            box-sizing: border-box;
+            padding: 40px 20px;
         }
 
-        /* --- MUSIC --- */
-        #musicControl { position: fixed; top: 15px; right: 15px; z-index: 1000; width: 40px; height: 40px; background: rgba(255,255,255,0.8); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); }
+        /* --- MUSIC CONTROL --- */
+        #musicControl { position: fixed; top: 20px; right: 20px; z-index: 1000; width: 45px; height: 45px; background: rgba(255,255,255,0.9); border: 1px solid var(--accent-gold); border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--accent-gold); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .music-playing { animation: rotate 4s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* --- HERO PAGES (Text at bottom) --- */
-        .hero { justify-content: flex-end; padding-bottom: 12vh; }
-        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; transition: transform 10s ease-out; }
-        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 40%, rgba(0,0,0,0.6)); }
+        /* --- HERO STYLE (Photos with Text at Bottom) --- */
+        .hero { justify-content: flex-end; padding-bottom: 15vh; background: #000; }
+        .hero-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; }
+        .hero-image::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(transparent 40%, rgba(0,0,0,0.7)); }
         .hero-content { position: relative; z-index: 10; color: white; width: 90%; }
 
-        /* --- INFO PAGES --- */
-        .info-page { padding: 40px 20px; }
-        .countdown { display: flex; justify-content: center; gap: 10px; margin: 25px 0; width: 100%; }
+        /* --- COUNTDOWN --- */
+        .countdown { display: flex; justify-content: center; gap: 12px; margin: 30px 0; }
         .time-block { display: flex; flex-direction: column; width: 65px; }
-        .number { font-size: 2rem; font-family: sans-serif; font-weight: 300; }
-        .label { font-size: 0.6rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; }
+        .number { font-size: 2.2rem; font-family: sans-serif; font-weight: 200; }
+        .label { font-size: 0.65rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- VENUE CARDS --- */
-        .location-card { width: 100%; max-width: 320px; margin-bottom: 50px; opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 12px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .maps-btn { display: inline-block; padding: 12px 30px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; font-size: 0.8rem; letter-spacing: 2px; }
+        /* --- LOCATION CARDS --- */
+        .location-card { width: 100%; max-width: 320px; margin-bottom: 60px; }
+        .venue-img { width: 100%; aspect-ratio: 1/1; border-radius: 15px; object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); }
+        .maps-btn { display: inline-block; padding: 12px 35px; border: 1px solid var(--accent-gold); color: var(--accent-gold); text-decoration: none; letter-spacing: 2px; font-size: 0.8rem; border-radius: 2px; }
 
-        /* --- RSVP FORM --- */
-        .rsvp-container { background: white; padding: 30px 20px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); width: 100%; max-width: 320px; text-align: left; }
-        .input-field { width: 100%; padding: 12px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 8px; box-sizing: border-box; font-family: inherit; }
-        .rsvp-btn { background: var(--text-dark); color: white; border: none; padding: 16px; width: 100%; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+        /* --- RSVP PROFESSIONAL FORM --- */
+        .rsvp-container { background: white; padding: 30px 20px; border-radius: 20px; box-shadow: 0 5px 25px rgba(0,0,0,0.06); width: 100%; max-width: 360px; text-align: left; }
+        .rsvp-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; text-align: center; margin-bottom: 25px; line-height: 1.4; }
+        .form-label { font-size: 0.95rem; font-weight: bold; display: block; margin: 15px 0 10px; }
+        .radio-group { margin-bottom: 10px; }
+        .radio-group label { display: block; margin-bottom: 8px; cursor: pointer; font-size: 0.95rem; }
+        
+        .input-row { display: flex; gap: 10px; margin-bottom: 15px; }
+        .input-style { width: 100%; padding: 12px 15px; border: 1px solid #eee; border-radius: 25px; background: #f9f9f9; outline: none; font-family: inherit; }
+        .textarea-style { width: 100%; height: 80px; padding: 12px 15px; border: 1px solid #eee; border-radius: 15px; background: #f9f9f9; outline: none; font-family: inherit; resize: none; }
+        
+        .submit-btn { width: 100%; padding: 16px; background: #000; color: #fff; border: none; border-radius: 30px; font-size: 1rem; margin-top: 10px; cursor: pointer; transition: opacity 0.3s; }
+        .submit-btn:active { opacity: 0.7; }
 
-        /* ANIMATIONS */
-        .visible { opacity: 1 !important; transform: translateY(0) !important; }
-        .scroll-hint { position: absolute; bottom: 20px; color: white; font-size: 0.7rem; letter-spacing: 3px; z-index: 10; animation: bounce 2s infinite; opacity: 0.7; }
-        @keyframes bounce { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-10px);} }
+        .scroll-hint { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 0.7rem; letter-spacing: 4px; animation: bounce 2s infinite; opacity: 0.6; z-index: 10; }
+        @keyframes bounce { 0%, 100% {transform: translate(-50%, 0);} 50% {transform: translate(-50%, -10px);} }
     </style>
 </head>
 <body>
@@ -62,66 +70,76 @@
     <audio id="weddingMusic" loop><source src="Hayko - Khostovanutyun.mp3" type="audio/mpeg"></audio>
     <div id="musicControl" onclick="toggleMusic()">♪</div>
 
-    <!-- PAGE 1 -->
+    <!-- 1. MAIN HERO -->
     <section class="hero">
-        <div class="hero-image" id="bg1" style="background-image: url('1nkar.jpeg');"></div>
+        <div class="hero-image" style="background-image: url('1nkar.jpeg');"></div>
         <div class="hero-content">
-            <h1 style="font-size: 3.2rem; margin: 0; font-weight: 400;">Ալյոնա & Գոռ</h1>
+            <h1 style="font-size: 3.5rem; margin: 0; font-weight: 400; font-family: 'Playfair Display', serif;">Ալյոնա & Գոռ</h1>
         </div>
         <div class="scroll-hint">SWIPE UP</div>
     </section>
 
-    <!-- PAGE 2: COUNTDOWN -->
-    <section class="info-page">
-        <div style="font-size: 1.4rem; font-style: italic;">Միջոցառմանը մնաց</div>
+    <!-- 2. COUNTDOWN -->
+    <section>
+        <div style="font-size: 1.5rem; font-style: italic; margin-bottom: 10px;">Միջոցառմանը մնաց</div>
         <div class="countdown">
             <div class="time-block"><span class="number" id="days">00</span><span class="label">Օր</span></div>
             <div class="time-block"><span class="number" id="hours">00</span><span class="label">Ժամ</span></div>
             <div class="time-block"><span class="number" id="minutes">00</span><span class="label">Րոպե</span></div>
             <div class="time-block"><span class="number" id="seconds">00</span><span class="label">Վրկ</span></div>
         </div>
-        <p style="max-width: 280px; line-height: 1.6; font-size: 1.2rem;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
+        <p style="max-width: 290px; line-height: 1.8; font-size: 1.25rem;">Սրտանց հրավիրում ենք Ձեզ տոնելու մեր կյանքի ամենակարևոր օրը:</p>
     </section>
 
-    <!-- PAGE 3: LOCATIONS -->
-    <section class="info-page">
+    <!-- 3. LOCATIONS -->
+    <section>
         <div class="location-card">
             <img src="photo_2026-05-01_12-21-14.jpg" class="venue-img">
-            <div style="font-size: 1.8rem;">Պսակադրություն</div>
-            <div style="color: var(--accent-gold); margin: 5px 0;">Ժամը՝ 14:00</div>
-            <div style="margin-bottom: 20px; color: #666;">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</div>
+            <h2 style="font-size: 2rem; margin: 0; font-family: 'Playfair Display', serif;">Պսակադրություն</h2>
+            <div style="color: var(--accent-gold); font-size: 1.2rem; margin: 10px 0;">Ժամը՝ 14:00</div>
+            <div style="margin-bottom: 25px; color: #666; font-size: 1.1rem;">Սուրբ Մեսրոպ Մաշտոց եկեղեցի</div>
             <a href="https://maps.app.goo.gl/mzSm5veBbR4KWLB87" class="maps-btn">Քարտեզ</a>
         </div>
 
         <div class="location-card">
             <img src="photo_2026-05-01_12-21-13.jpg" class="venue-img">
-            <div style="font-size: 1.8rem;">Հանդիսություն</div>
-            <div style="color: var(--accent-gold); margin: 5px 0;">Ժամը՝ 17:30</div>
-            <div style="margin-bottom: 20px; color: #666;">«Արարատ Իվենթ Հոլլ»</div>
+            <h2 style="font-size: 2rem; margin: 0; font-family: 'Playfair Display', serif;">Հանդիսություն</h2>
+            <div style="color: var(--accent-gold); font-size: 1.2rem; margin: 10px 0;">Ժամը՝ 17:30</div>
+            <div style="margin-bottom: 25px; color: #666; font-size: 1.1rem;">«Արարատ Իվենթ Հոլլ»</div>
             <a href="https://www.google.com/maps/search/?api=1&query=39.204468,46.462255" class="maps-btn">Քարտեզ</a>
         </div>
     </section>
 
-    <!-- PAGE 4: RSVP -->
-    <section class="info-page">
-        <p style="margin-bottom: 25px; font-size: 1.1rem; max-width: 300px;">
-            Խնդրում ենք նախապես տեղեկացնել Ձեր մասնակցության մասին
-        </p>
-        
+    <!-- 4. RSVP -->
+    <section style="background-color: #fcfaf7;">
         <div class="rsvp-container">
-            <label style="font-weight: bold;">1. Կկարողանա՞ք մասնակցել</label>
-            <div style="margin: 15px 0;">
-                <label style="display: block; margin-bottom: 10px;"><input type="radio" name="att" value="Այո, մեծ հաճույքով" checked> Այո, մեծ հաճույքով</label>
-                <label style="display: block;"><input type="radio" name="att" value="Ոչ, չեմ կարողանա"> Ոչ, չեմ կարողանա</label>
+            <div class="rsvp-title">Խնդրում ենք նախապես տեղեկացնել Ձեր մասնակցության մասին</div>
+            
+            <span class="form-label">Կկարողանա՞ք մասնակցել</span>
+            <div class="radio-group">
+                <label><input type="radio" name="att" value="Այո, սիրով" checked> Այո, սիրով կմասնակցեմ</label>
+                <label><input type="radio" name="att" value="Ոչ, ցավոք"> Ոչ, ցավոք չեմ կարողանա</label>
             </div>
 
-            <label style="font-weight: bold;">2. Անուն Ազգանուն</label>
-            <input type="text" id="name" class="input-field" placeholder="Լրացրեք այստեղ">
+            <span class="form-label">Ու՞մ կողմից եք</span>
+            <div class="radio-group" style="display: flex; gap: 20px;">
+                <label><input type="radio" name="side" value="Փեսայի" checked> Փեսայի</label>
+                <label><input type="radio" name="side" value="Հարսի"> Հարսի</label>
+            </div>
 
-            <label style="font-weight: bold;">3. Հյուրերի քանակը</label>
-            <input type="number" id="count" class="input-field" placeholder="0">
+            <span class="form-label">Տվյալներ</span>
+            <div class="input-row">
+                <input type="text" id="name" class="input-style" placeholder="Անուն Ազգանուն" style="flex: 2;">
+                <input type="number" id="count" class="input-style" placeholder="Քանակ" style="flex: 1;">
+            </div>
 
-            <button onclick="sendRSVP()" class="rsvp-btn">Ուղարկել</button>
+            <textarea id="msg" class="textarea-style" placeholder="Մեկնաբանություն..."></textarea>
+
+            <button onclick="handleRSVP()" class="submit-btn">Պատասխանել</button>
+        </div>
+        
+        <div style="margin-top: 40px; font-size: 0.8rem; color: #aaa; letter-spacing: 1px;">
+            INSTAGRAM | 077 255075
         </div>
     </section>
 
@@ -131,33 +149,36 @@
             if (music.paused) { music.play(); document.getElementById("musicControl").classList.add("music-playing"); } 
             else { music.pause(); document.getElementById("musicControl").classList.remove("music-playing"); } 
         }
+        // Auto-play attempt on first interaction
         document.addEventListener('click', () => { if(music.paused) toggleMusic(); }, {once: true});
 
-        function sendRSVP() {
-            const att = document.querySelector('input[name="att"]:checked').value;
+        function handleRSVP() {
             const name = document.getElementById('name').value;
             const count = document.getElementById('count').value;
-            if(!name) { alert("Խնդրում ենք լրացնել Անունը"); return; }
-            
+            const att = document.querySelector('input[name="att"]:checked').value;
+            const side = document.querySelector('input[name="side"]:checked').value;
+            const msg = document.getElementById('msg').value;
+
+            if(!name) { alert("Խնդրում ենք լրացնել Անուն Ազգանունը"); return; }
+
             const mail = "silvaohanyan2@gmail.com";
-            const sub = encodeURIComponent("RSVP: " + name);
-            const body = encodeURIComponent(`Մասնակցություն: ${att}\nԱնուն: ${name}\nՔանակ: ${count}`);
-            window.location.href = `mailto:${mail}?subject=${sub}&body=${body}`;
+            const subject = encodeURIComponent("RSVP - " + name);
+            const body = encodeURIComponent(
+                `Մասնակցություն: ${att}\nԿողմը: ${side}\nԱնուն: ${name}\nՀյուրեր: ${count}\nՆամակ: ${msg}`
+            );
+            window.location.href = `mailto:${mail}?subject=${subject}&body=${body}`;
         }
 
-        const weddingDate = new Date(2026, 7, 9, 17, 0, 0).getTime();
+        // Countdown Logic
+        const target = new Date(2026, 7, 9, 17, 0, 0).getTime();
         setInterval(() => {
-            const now = new Date().getTime(); const dist = weddingDate - now;
-            document.getElementById("days").innerText = Math.max(0, Math.floor(dist / 86400000));
-            document.getElementById("hours").innerText = Math.max(0, Math.floor((dist % 86400000) / 3600000));
-            document.getElementById("minutes").innerText = Math.max(0, Math.floor((dist % 3600000) / 60000));
-            document.getElementById("seconds").innerText = Math.max(0, Math.floor((dist % 60000) / 1000));
+            const now = new Date().getTime();
+            const diff = target - now;
+            document.getElementById("days").innerText = Math.max(0, Math.floor(diff / 86400000)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.max(0, Math.floor((diff % 86400000) / 3600000)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.max(0, Math.floor((diff % 3600000) / 60000)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.max(0, Math.floor((diff % 60000) / 1000)).toString().padStart(2, '0');
         }, 1000);
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.location-card').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
